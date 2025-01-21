@@ -15,7 +15,7 @@ import { lastValueFrom } from "rxjs";
 })
 export class IndexRouteComponent {
   products: Product[] = [];
-  loading = false;
+  loading = true;
   error: Error | null = null;
 
   private httpClient = inject(HttpClient);
@@ -38,7 +38,8 @@ export class IndexRouteComponent {
         lastValueFrom(productsService.getList(page - 1)).then(d=>{
           this.products = d.products
           this.pageCount.set(Math.ceil(d.total / 10))
-        })
+        }).catch(e=>this.error = e)
+        .finally(()=>this.loading = false)
       });
   }
 

@@ -1,37 +1,65 @@
 @if (loading) {
-    ...
-} @else if (error) {
-    {{ error.message }}
-} @else {
-    <!-- <div class="container mx-auto">
+    <div class="container mx-auto flex justify-center">
+        <div class="flex items-center gap-1">
+            @for (page of range(15); track $index) {
+                <div class="skeleton h-8 w-8"></div>
+            }
+          </div>
+    </div>
+<div class="grid grid-cols-4 justify-items-center">
+   
+  @for (item of range(10); track $index) {
+    <div class="card bg-base-100 shadow-xl border border-gray-900 w-[32ch] m-3 text-left  hover:shadow-2xl p-3">
+        <div class="skeleton h-64 w-full my-1">
+        </div>
+        <div class="skeleton h-8 w-28 my-1"></div>
+        <div class="skeleton h-8 w-full my-1"></div>
+      </div>
+  }
+</div>
+
+} @else if (error && !loading) {
+{{ error.message }}
+} @else if (!loading && !error){
+<!-- <div class="container mx-auto">
         <div class="grid grid-cols-5 gap-3">
            @for (product of products; track product.id) {
             <app-product-card [product]="product" />
            }
         </div>
     </div> -->
-}
-
 <div class="container mx-auto flex justify-center">
-    <div class="join">
-        @for (page of range(pageCount()); track $index) {
-            <a [routerLink]="'/'" [queryParams]="{page: page + 1}" [class.btn-primary]="page + 1 === currentPage()"  class="join-item btn">{{page + 1}}</a>
-        }
-    </div>
-    
+  <div class="join">
+    @for (page of range(pageCount()); track $index) {
+    <a
+      [routerLink]="'/'"
+      [queryParams]="{ page: page + 1 }"
+      [class.btn-primary]="page + 1 === currentPage()"
+      class="join-item btn"
+      >{{ page + 1 }}</a
+    >
+    }
+  </div>
 </div>
 
 <div class="grid grid-cols-4 justify-items-center">
-    @for (product of products; track product.id) {
-        <app-product-card class="contents" [product]="product" />
-    }
+  @for (product of products; track product.id) {
+  <app-product-card class="contents" [product]="product" />
+  }
 </div>
 
 <div class="container mx-auto flex justify-center my-3">
-    <div class="join">
-        @for (page of range(pageCount()); track $index) {
-            <a [routerLink]="'/'" [queryParams]="{page: page + 1}" [class.btn-primary]="page + 1 === currentPage()"  class="join-item btn">{{page + 1}}</a>
-        }
-    </div>
-    
+  <div class="join">
+    @for (page of range(pageCount()); track $index) {
+    <a
+      [routerLink]="'/'"
+      [queryParams]="{ page: page + 1 }"
+      [class.btn-primary]="page + 1 === currentPage()"
+      class="join-item btn"
+      >{{ page + 1 }}</a
+    >
+    }
+  </div>
 </div>
+
+}
