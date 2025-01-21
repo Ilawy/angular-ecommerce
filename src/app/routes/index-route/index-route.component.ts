@@ -29,6 +29,7 @@ export class IndexRouteComponent {
   ) {
     router.queryParams
       .subscribe((params) => {
+        this.loading = true
         // this.currentPage.set()
         const rawPage = +params["page"];
         const page = isNaN(rawPage) || rawPage < 1 ? 1 : rawPage;
@@ -49,5 +50,12 @@ export class IndexRouteComponent {
   }
 
   ngOnInit() {
+  }
+
+  scrollToTop(){
+    window.scroll({
+      top: 0,
+      behavior: "smooth"
+    })
   }
 }
