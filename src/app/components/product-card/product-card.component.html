@@ -1,7 +1,7 @@
 @if(product){
     <a class="customProductCart card bg-base-100 shadow-xl border border-gray-900 w-[32ch] m-3 text-left flex hover:shadow-2xl" [routerLink]="'/product/' + product.id">
         <figure class="relative">
-            <span class="absolute top-2 left-2 badge badge-success text-white font-bold">
+            <span class="absolute top-2 left-2 badge badge-success text-white font-bold" [class.customOutOfStock]="product.stock <= 0">
                 {{product.stock > 0 ? "In" : "Out of"}} stock
             </span>
             <img
