@@ -7,7 +7,7 @@ export interface CartItem {
   quantity: number;
 }
 
-const cart_storage_key = "ecom_cart"
+const cart_storage_key = "ecom_cart";
 
 @Injectable({
   providedIn: "root",
@@ -16,29 +16,29 @@ export class CartService {
   items: CartItem[] = [];
 
   private productsService = inject(ProductsService);
-  totalItems = signal(0)
+  totalItems = signal(0);
 
   constructor() {
-    this.#_load()
+    this.#_load();
   }
 
-  #_store(){
-    window.localStorage.setItem(cart_storage_key, JSON.stringify(this.items))
+  #_store() {
+    window.localStorage.setItem(cart_storage_key, JSON.stringify(this.items));
     this.totalItems.set(
-      this.items.reduce((total, item)=>total+item.quantity, 0)
-    )
+      this.items.reduce((total, item) => total + item.quantity, 0),
+    );
   }
 
-  #_load(){
-    const raw = window.localStorage.getItem(cart_storage_key)
-    if(raw){
-      try{
-        this.items = JSON.parse(raw)
+  #_load() {
+    const raw = window.localStorage.getItem(cart_storage_key);
+    if (raw) {
+      try {
+        this.items = JSON.parse(raw);
         this.totalItems.set(
-          this.items.reduce((total, item)=>total+item.quantity, 0)
-        )
-      }catch(e){
-        window.localStorage.removeItem(cart_storage_key)
+          this.items.reduce((total, item) => total + item.quantity, 0),
+        );
+      } catch (e) {
+        window.localStorage.removeItem(cart_storage_key);
       }
     }
   }
@@ -70,24 +70,23 @@ export class CartService {
         alert("cannot add item, stock won't cover requested quantity");
       }
     }
-    this.#_store()
+    this.#_store();
   }
 
-  async removeItem(itemId: number, quantity: number){
+  async removeItem(itemId: number, quantity: number) {
     const index = this.items.findIndex((item) => item.itemId === itemId);
-    if(index >= 0){
-      const ref = this.items[index]
+    if (index >= 0) {
+      const ref = this.items[index];
       ref.quantity -= quantity;
       console.log(ref);
-      if(ref.quantity <= 0)this.items = this.items.filter(item=>item.itemId !== itemId);
-      this.#_store()
-
+      if (ref.quantity <= 0) {
+        this.items = this.items.filter((item) => item.itemId !== itemId);
+      }
+      this.#_store();
     }
   }
 
-
-
-  async listItems(){
-    return this.items
+  async listItems() {
+    return this.items;
   }
 }

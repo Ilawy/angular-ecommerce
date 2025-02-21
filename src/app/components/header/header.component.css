@@ -1,3 +1,11 @@
-.active{
-    color: theme('colors.green.600');
+.active {
+  padding: 0.25rem 1rem;
+  border-radius: 0.45rem;
+  position: relative;
+  color: theme("colors.green.600");
+  @media (prefers-color-scheme: dark) {
+    color: black;
+    z-index: 3;
+    background: white;
+  }
 }

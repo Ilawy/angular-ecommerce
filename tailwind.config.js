@@ -5,20 +5,19 @@ module.exports = {
   ],
   safelist: [
     "badge-success",
-    "badge-error"
+    "badge-error",
   ],
   theme: {
     extend: {
       screens: {
         // 'tablet': '1300'
-      }
+      },
     },
   },
   plugins: [
-    require('daisyui'),
-
+    require("daisyui"),
   ],
   daisyui: {
-    themes: ["pastel", "dark"]
-  }
-}
+    themes: ["pastel", "dark"],
+  },
+};

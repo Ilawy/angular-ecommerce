@@ -6,7 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { passwordConfirmValidator, passwordValidator } from "../../../lib/validators";
+import {
+  passwordConfirmValidator,
+  passwordValidator,
+} from "../../../lib/validators";
 
 @Component({
   selector: "app-register-route",
@@ -15,24 +18,23 @@ import { passwordConfirmValidator, passwordValidator } from "../../../lib/valida
   styleUrl: "./register-route.component.css",
 })
 export class RegisterRouteComponent implements OnInit {
-  errorHandler(name: string) {    
-    if(!(name in this.formControls))throw new Error("Invalid name")
-      const errors =this.formControls[name].errors 
-      if(errors?.['required']){
-        return `Field '${name}' is required`
-      }else if(errors?.['pattern']){
-
-      }else if(errors?.['minlength']){
-        
-        return `Field '${name}' must be at least ${errors['minlength'].requiredLength} characters`
-      }else if(errors?.['custom_password']){
-        return errors?.['custom_password']
-      }
-      console.log(errors);
-      
-      return "Error in this field"
-
+  errorHandler(name: string) {
+    if (!(name in this.formControls)) throw new Error("Invalid name");
+    const errors = this.formControls[name].errors;
+    if (errors?.["required"]) {
+      return `Field '${name}' is required`;
+    } else if (errors?.["pattern"]) {
+    } else if (errors?.["minlength"]) {
+      return `Field '${name}' must be at least ${
+        errors["minlength"].requiredLength
+      } characters`;
+    } else if (errors?.["custom_password"]) {
+      return errors?.["custom_password"];
     }
+    console.log(errors);
+
+    return "Error in this field";
+  }
   form!: FormGroup;
 
   get formControls() {
@@ -40,7 +42,7 @@ export class RegisterRouteComponent implements OnInit {
   }
 
   submit() {
-    this.form.markAllAsTouched()
+    this.form.markAllAsTouched();
     console.log(this.form.valid);
     console.log(this.formControls["password"].errors);
   }
@@ -67,8 +69,8 @@ export class RegisterRouteComponent implements OnInit {
       passwordConfirm: ["", [
         // Validators.required,
         //TODO: use parent
-        passwordConfirmValidator("password")
-      ]]
+        passwordConfirmValidator("password"),
+      ]],
     });
   }
 }

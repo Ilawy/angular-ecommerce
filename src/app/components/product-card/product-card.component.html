@@ -1,29 +1,38 @@
-@if(product){
-    <a class="customProductCart card bg-base-100 shadow-xl border border-gray-900 w-[32ch] m-3 text-left flex hover:shadow-2xl" [routerLink]="'/product/' + product.id">
-        <figure class="relative">
-            <span class="absolute top-2 left-2 badge badge-success text-white font-bold" [class.customOutOfStock]="product.stock <= 0">
-                {{product.stock > 0 ? "In" : "Out of"}} stock
-            </span>
-            <img
-                [src]="product.images[0]"
-                class="h-48 object-cover"
-                alt="Shoes"
-            />
-        </figure>
-        <div class="card-body">
-            <div class="card-title flex items-center justify-between flex-wrap">
-                <span>{{ product.title }}</span>
-                <span class="font-normal">{{product.price}}EGP</span>
-            </div>
-            <div class="text-yellow-300 rate" [style]="'background-position: ' + ((product.rating / 5) * 120) + 'px'">
-                ★★★★★
-             </div>
-            {{ product.tags.join(", ") }}
-            <div class="card-actions justify-end mt-auto">
-                <button class="btn btn-sm btn-primary">Buy Now</button>
-            </div>
-        </div>
-    </a>
-}@else {
-    <i>Something went wrong</i>
+@if (product) {
+  <a
+    class="customProductCart card bg-base-100 shadow-xl border border-gray-900 w-[32ch] m-3 text-left flex hover:shadow-2xl"
+    [routerLink]='"/product/" + product.id'
+  >
+    <figure class="relative">
+      <span
+        class="absolute top-2 left-2 badge badge-success text-white font-bold"
+        [class.customOutOfStock]="product.stock <= 0"
+      >
+        {{ product.stock > 0 ? "In" : "Out of" }} stock
+      </span>
+      <img
+        [src]="product.images[0]"
+        class="h-48 object-cover"
+        alt="Shoes"
+      />
+    </figure>
+    <div class="card-body">
+      <div class="card-title flex items-center justify-between flex-wrap">
+        <span>{{ product.title }}</span>
+        <span class="font-normal">{{ product.price }}EGP</span>
+      </div>
+      <div
+        class="text-yellow-300 rate"
+        [style]='"background-position: " + ((product.rating / 5) * 120) + "px"'
+      >
+        ★★★★★
+      </div>
+      {{ product.tags.join(", ") }}
+      <div class="card-actions justify-end mt-auto">
+        <button class="btn btn-sm btn-primary">Buy Now</button>
+      </div>
+    </div>
+  </a>
+} @else {
+  <i>Something went wrong</i>
 }

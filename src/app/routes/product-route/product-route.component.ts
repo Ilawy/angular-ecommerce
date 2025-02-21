@@ -17,43 +17,48 @@ export class ProductRouteComponent implements OnInit {
   loading = true;
   error: Error | null = null;
   //prevent adding items as long as there's a going cart request
-  locked = false
+  locked = false;
 
   private productsService = inject(ProductsService);
   private cartService = inject(CartService);
   @Input()
   id!: string;
 
-  availableQuantity = signal(0)
+  availableQuantity = signal(0);
 
   buyProps = {
     quantity: 1,
-  }
+  };
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    firstValueFrom(this.productsService.getOne(this.id)).then(result=>{
-      this.product = result
-      this.availableQuantity.set(this.product.stock - this.cartService.cartedQuantityOfItem(this.product.id))
-    }).catch(error=>{
-      this.error = error
+    firstValueFrom(this.productsService.getOne(this.id)).then((result) => {
+      this.product = result;
+      this.availableQuantity.set(
+        this.product.stock -
+          this.cartService.cartedQuantityOfItem(this.product.id),
+      );
+    }).catch((error) => {
+      this.error = error;
       console.log(error);
-      
     })
-    .finally(()=>this.loading = false)
-    .finally(()=>{
-    })
+      .finally(() => this.loading = false)
+      .finally(() => {
+      });
   }
 
-
-  handleCartAdding(){
-    this.locked = true
-    this.cartService.addItem(this.product!.id, +this.buyProps.quantity).finally(()=>{
-      this.locked = false
-    })
-    this.availableQuantity.set(this.product!.stock - this.cartService.cartedQuantityOfItem(this.product!.id))
-    
+  handleCartAdding() {
+    this.locked = true;
+    this.cartService.addItem(this.product!.id, +this.buyProps.quantity).finally(
+      () => {
+        this.locked = false;
+      },
+    );
+    this.availableQuantity.set(
+      this.product!.stock -
+        this.cartService.cartedQuantityOfItem(this.product!.id),
+    );
   }
 
   currentImage = 0;

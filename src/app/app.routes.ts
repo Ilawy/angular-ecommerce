@@ -7,29 +7,29 @@ import { NotfoundRouteComponent } from "./routes/notfound-route/notfound-route.c
 import { CartRouteComponent } from "./routes/cart-route/cart-route.component";
 
 export const routes: Routes = [{
-    path: "",
-    component: IndexRouteComponent,
-    title: "ShopEG - Home",
+  path: "",
+  component: IndexRouteComponent,
+  title: "ShopEG - Home",
 }, {
-    path: "product/:id",
-    component: ProductRouteComponent,
-    title: (route) => {
-        return `ShopEG - ${route.params["id"]}`;
-    },
+  path: "product/:id",
+  component: ProductRouteComponent,
+  title: (route) => {
+    return `ShopEG - ${route.params["id"]}`;
+  },
 }, {
-    path: "login",
-    component: LoginRouteComponent,
-    title: "ShopEG - Login",
+  path: "login",
+  component: LoginRouteComponent,
+  title: "ShopEG - Login",
 }, {
-    path: "register",
-    component: RegisterRouteComponent,
-    title: "ShopEG - Register",
+  path: "register",
+  component: RegisterRouteComponent,
+  title: "ShopEG - Register",
 }, {
-    path: "cart",
-    component: CartRouteComponent,
-    title: "ShopEG - Cart",
+  path: "cart",
+  component: CartRouteComponent,
+  title: "ShopEG - Cart",
 }, {
-    path: "**",
-    component: NotfoundRouteComponent,
-    title: "ShopEG - 404",
+  path: "**",
+  component: NotfoundRouteComponent,
+  title: "ShopEG - 404",
 }];

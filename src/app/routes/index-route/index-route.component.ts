@@ -29,33 +29,32 @@ export class IndexRouteComponent {
   ) {
     router.queryParams
       .subscribe((params) => {
-        this.loading = true
+        this.loading = true;
         // this.currentPage.set()
         const rawPage = +params["page"];
         const page = isNaN(rawPage) || rawPage < 1 ? 1 : rawPage;
         console.log(page);
-        
+
         this.currentPage.set(page);
-        lastValueFrom(productsService.getList(page - 1)).then(d=>{
-          this.products = d.products
-          this.pageCount.set(Math.ceil(d.total / 10))
-        }).catch(e=>this.error = e)
-        .finally(()=>this.loading = false)
+        lastValueFrom(productsService.getList(page - 1)).then((d) => {
+          this.products = d.products;
+          this.pageCount.set(Math.ceil(d.total / 10));
+        }).catch((e) => this.error = e)
+          .finally(() => this.loading = false);
       });
   }
 
-
-  range(length: number){
-    return Array.from({ length }).map((_, i)=>i)
+  range(length: number) {
+    return Array.from({ length }).map((_, i) => i);
   }
 
   ngOnInit() {
   }
 
-  scrollToTop(){
+  scrollToTop() {
     window.scroll({
       top: 0,
-      behavior: "smooth"
-    })
+      behavior: "smooth",
+    });
   }
 }

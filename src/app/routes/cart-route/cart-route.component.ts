@@ -22,7 +22,7 @@ export class CartRouteComponent {
   constructor() {}
 
   async load() {
-    this.loading = true
+    this.loading = true;
     const cartItems = await this.cartService.listItems();
     this.items = await Promise.all(cartItems.map(async (item) => {
       return {
@@ -31,8 +31,8 @@ export class CartRouteComponent {
         ),
         quantity: item.quantity,
       };
-    })).finally(()=>{
-      this.loading = false
+    })).finally(() => {
+      this.loading = false;
     });
   }
 
@@ -53,5 +53,12 @@ export class CartRouteComponent {
       itemId,
       this.items.find((i) => i.product.id === itemId)!.quantity,
     ).finally(() => this.load());
+  }
+
+  get subtotal() {
+    return this.items.reduce(
+      (total, item) => total + (item.quantity * item.product.price),
+      0,
+    );
   }
 }
